@@ -1,0 +1,75 @@
+%vscode_config。
+%导言区，用于配置格式
+%指定编译器是xelatex
+%!TEX program=xelatex 
+\documentclass[10pt, UTF8]{ctexart}%指明文档是中文
+\usepackage{hyperref}%导入包
+\usepackage{graphicx}%导入图片包
+\usepackage[b5paper]{geometry}%定义大小
+%改变字体背景颜色需要color和framed宏包
+\usepackage{framed}
+\usepackage{color}% 导入颜色
+\usepackage{underscore}%取消下划线识别
+\usepackage[normalem]{ulem} 
+\usepackage{amsmath}%加入对齐包
+\definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
+%自定义函数
+\def\CodingInline#1{\colorbox{shadecolor}{\color{black}#1}}%内联代码
+\def\CodingBlock#1{\begin{shaded} \noindent#1 \end{shaded}}
+\def\Emphasize#1{\textcolor[rgb]{1,0,0}{#1}}
+\newcommand{\InsertEqution}[2]{\begin{equation}
+  \label{#1}
+   #2
+ \end{equation}}
+\newcommand{\RefEq}[1]{Eq.\ref{#1}}
+\newcommand{\InsertInlineEq}[1]{$#1$}
+%正文区
+%begin end 用于指定环境
+\begin{document}
+  \begin{sloppypar}
+     %配置开头
+     \title{傅里叶光学和计算成像翻译}
+     \author{Dr. Li}
+     \date{2020年5月3日}
+     \maketitle
+
+     %摘要
+    \begin{abstract}
+        用于翻译Fourier Optics and Computatinal Imaging, 目前自用
+        \begin{figure}[htbp]%h当前位置，t顶部，b底部，p浮动
+            \centering
+            \includegraphics[width=1\textwidth]{D:/MyCoding/ElectronicComics/comics4.png}
+            % \caption{LOGO}
+        \end{figure} 
+    \end{abstract}
+    \newpage
+
+    
+    \section{采样定理}
+    我们经常听到或谈论今天在我们周围看到的数字革命。由于我们每天使用的数字设备，我们的生活在一代人的时间内发生了巨大变化。为了使像手机这样的小工具成为可能，必须开发和整合许多技术。但是为什么我们经常建模为连续函数的信号的数字表示之所以可能的核心思想在于采样定理。在讨论这个之前，我要指出，通过电磁手段进行的通信在20世纪初很实用。那时，量化传达某些特定信息所需的资源的问题变得很重要。克劳德·香农（Claude Shannon）为开发形式主义以量化信息以进行交流而功劳。他关于该主题的标题为“通信的数学理论”（Bell Systems Tech. Journal
+    1948）的文章是经典著作。正如我之前已经讨论过的，在成像或相关现象中我们感兴趣的信息被编码在波中将信息从对象传送到我们系统上。尽管我们的大多数波动现象模型都是连续的，但任何测量所需的采样都是在离散点进行的。采样多少是合适的？从直觉上看，抽取的样本越多越好。 但是，也很明显，如果您想对语音信号进行采样，那么当感兴趣的最高音频频率最多为几kHz时，以1MHz或1GHz的速率进行采样可能会太多。 我们可以以某种方式将这种直觉形式化吗？我们可以确定所需采样率的界限吗？ 我们将在本章中研究这个重要的基本问题。 采样思想在计算成像系统中起着重要作用。图像的离散点通常被表示为图像的像素点。
+    
+   \subsection{泊松求和方程}
+   我们将通过对泊松求和方程的傅里叶变换得出采样定理。有了泊松方程我们就不难获得采样定理。只是在交流信息中这个结果才有意义。我们首先考虑一个信号$g(x)$和对应的傅里叶变换
+   \InsertEqution{3.1}{G\left(f_{x}\right)=\int_{-\infty}^{\infty} d x g(x) \exp \left(-i 2 \pi f_{x} x\right)}
+  首先我们使用$G(f_x)$构造一个周期为$\Delta$的周期函数，然后表示为一个傅里叶序列\InsertEqution{3.2}{\sum_{n=-\infty}^{\infty} G\left(f_{x}+n \Delta\right)=\sum_{k=-\infty}^{\infty} g_{k} \exp \left(-i 2 \pi k f_{x} / \Delta\right)}
+  利用周期函数的傅里叶逆变换可获得\RefEq{3.2}系数$g_k$。\InsertEqution{3.3}{\begin{aligned}
+g_{k} &=\frac{1}{\Delta} \int_{-\Delta / 2}^{\Delta / 2} d f_{x} \sum_{n=-\infty} G\left(f_{x}+n \Delta\right) \exp \left(i 2 \pi k f_{x} / \Delta\right) \\
+&=\frac{1}{\Delta} \sum_{n=-\infty}^{\infty} \int_{\left(n-\frac{1}{2}\right) \Delta}^{\left(n+\frac{1}{2}\right) \Delta} d u G(u) \exp (i 2 \pi k u / \Delta-i 2 \pi n k)
+\end{aligned}}
+因为\InsertInlineEq{n,k}是整数，我们可以知道\InsertInlineEq{\exp (-i 2 \pi n k)=1}。此外因为\InsertInlineEq{n:-\infty\rightarrow\infty},有效的覆盖了整个\InsertInlineEq{u},因此周期项可以忽略，\RefEq{3.3}可以写成\InsertEqution{3.4}{\begin{aligned}
+  g_{k} &=\frac{1}{\Delta} \int_{-\infty}^{\infty} d u G(u) \exp (i 2 \pi k u / \Delta) \\
+  &=\frac{1}{\Delta} g\left(\frac{k}{\Delta}\right)
+  \end{aligned}}
+从以上结果可以知道，通过对\InsertInlineEq{G(f_x)}添加规则的移位形成的周期函数，相应的傅立叶级数系数​​只是点\InsertInlineEq{x=k/\Delta}处函数\InsertInlineEq{g(x)}的周期采样,\InsertInlineEq{k}为整数。
+\subsection{特殊情况下的采样定理}
+为了建立采样定理，我们将定义带限信号。如果信号\InsertInlineEq{g(x)}的傅里叶变换在\InsertInlineEq{f_{x}:(-B, B)}外消失，我们就称这个信号是带限信号。现在我们将考虑当信号\InsertInlineEq{g(x)}受到上述带宽限制且\InsertInlineEq{\Delta = 2B}时的泊松求和公式的特例。 现在，傅立叶变换的移位版本不重叠，我们可以在方程\RefEq{3.2}两边相乘一个矩形函数来滤除\InsertInlineEq{n=0}项:\InsertEqution{3.5}{G\left(f_{x}\right)=\frac{1}{2 B} \sum_{k=-\infty}^{\infty} g\left(\frac{k}{2 B}\right) \exp \left(-i 2 \pi k \frac{f_{x}}{2 B}\right) \operatorname{rect}\left(\frac{f_{x}}{2 B}\right)}
+对齐进行逆傅里叶变换可以得到\InsertEqution{3.6}{\begin{aligned}
+  g(x) &=\frac{1}{2 B} \sum_{k=-\infty}^{\infty} g\left(\frac{k}{2 B}\right) \int_{-\infty}^{\infty} d f_{x} \exp \left[i 2 \pi f_{x}\left(x-\frac{k}{2 B}\right)\right] \operatorname{rect}\left(\frac{f_{x}}{2 B}\right) \\
+  &=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{2 B}\right) \operatorname{sinc}\left[2 B\left(x-\frac{k}{2 B}\right)\right]
+\end{aligned}}
+它告诉我们，以\InsertInlineEq{1/2B}分开的离散点处的带限信号\InsertInlineEq{g(x)}的样本包含与连续信号相同的信息。 如果我们知道这些离散的样本值，则可以\CodingInline{通过对样本进行正弦插值}来重建连续信号。这个采样率被称为奈奎斯特率。
+\subsection{采样公式的其他说明}
+
+  \end{sloppypar}
+\end{document}
