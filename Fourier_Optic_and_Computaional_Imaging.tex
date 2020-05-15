@@ -9,12 +9,13 @@
 %改变字体背景颜色需要color和framed宏包
 \usepackage{framed}
 \usepackage{color}% 导入颜色
-\usepackage{underscore}%取消下划线识别
+%\usepackage{underscore}%取消下划线识别 这个包去掉，要不文件名不能有下划线
 \usepackage[normalem]{ulem} 
 \usepackage{amsmath}%加入对齐包
 \definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
 %自定义函数
 \def\CodingInline#1{\colorbox{shadecolor}{\color{black}#1}}%内联代码
+\newcommand {\InsertPic}[3]{\begin{figure}[htbp] \label{#2}\centering \includegraphics[width=1\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare/#1}\caption{#3} \end{figure}}%插入图片
 \def\CodingBlock#1{\begin{shaded} \noindent#1 \end{shaded}}
 \def\Emphasize#1{\textcolor[rgb]{1,0,0}{#1}}
 \newcommand{\InsertEqution}[2]{\begin{equation}
@@ -23,6 +24,7 @@
  \end{equation}}
 \newcommand{\RefEq}[1]{Eq.\ref{#1}}
 \newcommand{\InsertInlineEq}[1]{$#1$}
+\newcommand{\RefFig}[2]{\\Figure \ref{#1}:#2}
 %正文区
 %begin end 用于指定环境
 \begin{document}
@@ -70,6 +72,23 @@ g_{k} &=\frac{1}{\Delta} \int_{-\Delta / 2}^{\Delta / 2} d f_{x} \sum_{n=-\infty
 \end{aligned}}
 它告诉我们，以\InsertInlineEq{1/2B}分开的离散点处的带限信号\InsertInlineEq{g(x)}的样本包含与连续信号相同的信息。 如果我们知道这些离散的样本值，则可以\CodingInline{通过对样本进行正弦插值}来重建连续信号。这个采样率被称为奈奎斯特率。
 \subsection{采样公式的其他说明}
-
+关于采样定理，需要注意的比较重要的一点是，移动的sinc函数集合构成了一组正交完备基。这与其他集合不同（如Hermite-Gauss函数），这里是统一个函数不同的移动版本是正交的。这种不寻常的基可以追溯到小波等不寻常基的起源。\\
+这个集合的正交性的证明如下：\InsertEqution{3.7}{\begin{array}{l}
+  \int_{-\infty}^{\infty} d x \operatorname{sinc}(2 B x-m) \operatorname{sinc}(2 B x-n) \\
+  \quad=\left.\mathcal{F}^{-1}\left\{\frac{1}{(2 B)^{2}} \operatorname{rect}^{2}\left(\frac{f_{x}}{2 B}\right)\right\}\right|_{x=\frac{m-n}{2 B}} \\
+  \quad=\frac{1}{2 B} \operatorname{sinc}(m-n) \\
+  \quad=\frac{1}{2 B} \delta_{m, n}
+  \end{array}}
+  在计算中，我们使用的卷积定理。带限信号\InsertInlineEq{g(\frac{m}{2B})}可以看成sinc基下的相关系数，即\InsertEqution{3.8}{g\left(\frac{m}{2 B}\right)=\frac{1}{2 B} \int_{-\infty}^{\infty} d x g(x) \operatorname{sinc}(2 B x-m)}
+sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3.9}{\sum_{n=-\infty}^{\infty} \operatorname{sinc}(2 B x-m) \operatorname{sinc}\left(2 B x^{\prime}-m\right)=\operatorname{sinc}\left[2 B\left(x-x^{\prime}\right)\right]}
+使用采样定理应用于sinc函数本身。对于每一个带限信号\InsertInlineEq{g(x)},带宽\InsertInlineEq{f_{x}:(-B, B)},我们有\InsertEqution{3.10}{\begin{aligned}
+  \int_{-\infty}^{\infty} d x^{\prime} g\left(x^{\prime}\right) \operatorname{sinc}\left[2 B\left(x-x^{\prime}\right)\right] &=\mathcal{F}^{-1}\left[G\left(f_{x}\right) \frac{1}{2 B} \operatorname{rect}\left(\frac{f_{x}}{2 B}\right)\right] \\
+  &=\frac{1}{2 B} g(x)
+  \end{aligned}}
+  如果现在将完整性关系用于\InsertInlineEq{sinc[2B(x-x')]}和\RefEq{3.8}的关系，就得出了采样定理。因此，sinc基可以表示每个带限函数，可以将表达式\InsertInlineEq{sinc[2B(x-x')]}视为\InsertInlineEq{\delta(x-x')}的带限版本。
+  \subsection{对载频信号的采样}
+  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{Image_181.png}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于给定的整数\InsertInlineEq{N}(可能是最大的整数对于确定得\InsertInlineEq{f_0,B}),这样信号\InsertInlineEq{g(x)}就可以用\InsertInlineEq{1/(4B_0)}的采样间隔来获得采样定理下的信号形式：\InsertEqution{3.13}{g(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \cos \left[2 \pi f_{0}\left(x-\frac{k}{4 B_{0}}\right)\right]}
+  也可以使用低通采样定理类似的论据得出上述结果，并且有时将其称为带通采样定理。 此结果的中心思想是有效利用以下事实：即使采样间隔比\InsertInlineEq{1/2(f_0+B)}大得多，傅里叶空间中的空白区域也不会导致混叠。上式中的余弦项可以表示为两个指数项的总和，而解调后的包络\InsertInlineEq{a(x)}可以表示为一个采样序列：\InsertEqution{3.14}{a(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \exp \left(-2 \pi f_{0} \frac{k}{4 B_{0}}\right)}
+  因此，采样率与复杂包络中的波动相当，而不是最大信号带宽。在以上讨论中暗含了对载波频率\InsertInlineEq{f_0}的了解。正如我们将在下一节中讨论的那样，此结果对于量化信号的自由度非常重要。
   \end{sloppypar}
 \end{document}
