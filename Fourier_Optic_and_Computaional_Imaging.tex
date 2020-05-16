@@ -15,7 +15,7 @@
 \definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
 %自定义函数
 \def\CodingInline#1{\colorbox{shadecolor}{\color{black}#1}}%内联代码
-\newcommand {\InsertPic}[3]{\begin{figure}[htbp] \label{#2}\centering \includegraphics[width=1\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare/#1}\caption{#3} \end{figure}}%插入图片
+\newcommand {\InsertPic}[3]{\begin{figure}[htbp] \label{#2}\centering \includegraphics[width=0.8\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare/#1}\caption{#3} \end{figure}}%插入图片
 \def\CodingBlock#1{\begin{shaded} \noindent#1 \end{shaded}}
 \def\Emphasize#1{\textcolor[rgb]{1,0,0}{#1}}
 \newcommand{\InsertEqution}[2]{\begin{equation}
@@ -87,8 +87,15 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
   \end{aligned}}
   如果现在将完整性关系用于\InsertInlineEq{sinc[2B(x-x')]}和\RefEq{3.8}的关系，就得出了采样定理。因此，sinc基可以表示每个带限函数，可以将表达式\InsertInlineEq{sinc[2B(x-x')]}视为\InsertInlineEq{\delta(x-x')}的带限版本。
   \subsection{对载频信号的采样}
-  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{Image_181.png}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于给定的整数\InsertInlineEq{N}(可能是最大的整数对于确定得\InsertInlineEq{f_0,B}),这样信号\InsertInlineEq{g(x)}就可以用\InsertInlineEq{1/(4B_0)}的采样间隔来获得采样定理下的信号形式：\InsertEqution{3.13}{g(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \cos \left[2 \pi f_{0}\left(x-\frac{k}{4 B_{0}}\right)\right]}
+  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{Image_181.png}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此包络的有效带宽和载频的比值\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于一些给定的整数\InsertInlineEq{N}(可能是最大值对于确定的\InsertInlineEq{f_0,B}),\footnote[1]{这里意思是说对于给定的\InsertInlineEq{B},总可以找到一个稍微大一些的值\InsertInlineEq{B_0},使其满足\InsertInlineEq{f_0}是\InsertInlineEq{N+\frac{1}{2}}倍的\InsertInlineEq{B_0},这样\InsertInlineEq{N}可以使用sinc函数的频移来表示，剩下来的\InsertInlineEq{\frac{1}{2}}就是一个2倍于\InsertInlineEq{2B_0}的信号，可以用\InsertInlineEq{1/4B_0}的间隔去采样。}
+  这样信号\InsertInlineEq{g(x)}就可以用\InsertInlineEq{1/(4B_0)}的采样间隔来获得采样定理下的信号形式：\InsertEqution{3.13}{g(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \cos \left[2 \pi f_{0}\left(x-\frac{k}{4 B_{0}}\right)\right]}
   也可以使用低通采样定理类似的论据得出上述结果，并且有时将其称为带通采样定理。 此结果的中心思想是有效利用以下事实：即使采样间隔比\InsertInlineEq{1/2(f_0+B)}大得多，傅里叶空间中的空白区域也不会导致混叠。上式中的余弦项可以表示为两个指数项的总和，而解调后的包络\InsertInlineEq{a(x)}可以表示为一个采样序列：\InsertEqution{3.14}{a(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \exp \left(-2 \pi f_{0} \frac{k}{4 B_{0}}\right)}
   因此，采样率与复杂包络中的波动相当，而不是最大信号带宽。在以上讨论中暗含了对载波频率\InsertInlineEq{f_0}的了解。正如我们将在下一节中讨论的那样，此结果对于量化信号的自由度非常重要。
+  \subsection{信号的自由度：空间带宽积}
+  假设我们有一个长度为2L的信号要存储或传输给其他人，需要多少空间？大多数实际信号或图像都是有限范围的，并且严格意义上来讲不能有限长的信号不能同时是带限的。它的傅里叶变换原则上必须在整个频率轴上扩展。因此，带宽的概念需要仔细定义。对于长度在\InsertInlineEq{x:(-L,L)}的信号\InsertInlineEq{g(x)},我们在频率段\InsertInlineEq{f_x:(-B,B)}定义能量集中比\InsertInlineEq{\alpha}为\InsertEqution{3.15}{\alpha=\frac{\int_{-B}^{B} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}{\int_{-\infty}^{\infty} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}}。
+对于带宽的实用的定义为在频率段\InsertInlineEq{fx:(-B,B)}内，能量集中比接近于实际应用要求的1（比如0.999）。需要多少个信号样本才能以相当准确的方式表示它？ 答案是\InsertEqution{2B}{2L}。\InsertInlineEq{N=4BL}的乘积称为空间带宽积，他表示信号的自由度。对于2D信号或者图像这个数是\InsertInlineEq{N^2},即表示图形所需的像素数。
+信号和系统的空间带宽积是两个不同的概念。假设我们的对象是放置在玻片内的生物组织样本，需要在显微镜下观察。活细胞是一个非常复杂的对象，感兴趣的细节可以在分子或者纳米尺度上对应于空间频率的数量级是\InsertInlineEq{10^{9}m^{-1}},则对于一个\InsertInlineEq{1mm\times1mm}物体，空间带宽积为为\InsertInlineEq{(10^-3)^2\times(10^9)^2=10^12}。而观测细胞的系统可以具有小的多的空间带宽积。用于可见光的显微镜的分辨率可能只有\InsertInlineEq{1\mu m}，因此该显微系统的空间带宽积是\InsertInlineEq{(10^-3)^2\times(10^6)^2=10^6}。因此，如果要将CCD相机作为探测器放置在显微镜的后端，则\InsertInlineEq{1000\times1000}像素的传感器芯片就足够了。如果我们在弱光条件下运行，则噪声会使来自每个像素的信号有些不可靠。我们可能需要对传感器芯片进行binning，以便对一个\InsertInlineEq{2\times2}像素块进行平均。因此，生成的图像是\InsertInlineEq{500\times500}像素,减少了可以从系统设置程序中检索到的信息。因此，空间带宽乘积既取决于系统参数，又取决于信噪比。\footnote[1]{这里不太正确，应该是空间带宽积还是这么多，但是信号的置信度下降了，导致可以直接获得的真实信息的量减少了，这种是可以通过其他方法恢复的。}
+
+
   \end{sloppypar}
 \end{document}
