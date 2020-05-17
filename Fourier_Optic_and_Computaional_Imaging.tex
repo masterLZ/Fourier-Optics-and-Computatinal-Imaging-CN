@@ -15,7 +15,7 @@
 \definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
 %自定义函数
 \def\CodingInline#1{\colorbox{shadecolor}{\color{black}#1}}%内联代码
-\newcommand {\InsertPic}[3]{\begin{figure}[htbp] \label{#2}\centering \includegraphics[width=0.8\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare/#1}\caption{#3} \end{figure}}%插入图片
+\newcommand {\InsertPic}[3]{\begin{figure}[htbp] \label{#2}\centering \includegraphics[width=1\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare_img_#1.jpg}\caption{#3} \end{figure}}%插入图片
 \def\CodingBlock#1{\begin{shaded} \noindent#1 \end{shaded}}
 \def\Emphasize#1{\textcolor[rgb]{1,0,0}{#1}}
 \newcommand{\InsertEqution}[2]{\begin{equation}
@@ -24,7 +24,7 @@
  \end{equation}}
 \newcommand{\RefEq}[1]{Eq.\ref{#1}}
 \newcommand{\InsertInlineEq}[1]{$#1$}
-\newcommand{\RefFig}[2]{\\Figure \ref{#1}:#2}
+\newcommand{\RefFig}[1]{图 \ref{#1}}
 %正文区
 %begin end 用于指定环境
 \begin{document}
@@ -87,15 +87,61 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
   \end{aligned}}
   如果现在将完整性关系用于\InsertInlineEq{sinc[2B(x-x')]}和\RefEq{3.8}的关系，就得出了采样定理。因此，sinc基可以表示每个带限函数，可以将表达式\InsertInlineEq{sinc[2B(x-x')]}视为\InsertInlineEq{\delta(x-x')}的带限版本。
   \subsection{对载频信号的采样}
-  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{Image_181.png}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此包络的有效带宽和载频的比值\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于一些给定的整数\InsertInlineEq{N}(可能是最大值对于确定的\InsertInlineEq{f_0,B}),\footnote[1]{这里意思是说对于给定的\InsertInlineEq{B},总可以找到一个稍微大一些的值\InsertInlineEq{B_0},使其满足\InsertInlineEq{f_0}是\InsertInlineEq{N+\frac{1}{2}}倍的\InsertInlineEq{B_0},这样\InsertInlineEq{N}可以使用sinc函数的频移来表示，剩下来的\InsertInlineEq{\frac{1}{2}}就是一个2倍于\InsertInlineEq{2B_0}的信号，可以用\InsertInlineEq{1/4B_0}的间隔去采样。}
+  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{13}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此包络的有效带宽和载频的比值\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于一些给定的整数\InsertInlineEq{N}(可能是最大值对于确定的\InsertInlineEq{f_0,B}),\footnote[1]{这里意思是说对于给定的\InsertInlineEq{B},总可以找到一个稍微大一些的值\InsertInlineEq{B_0},使其满足\InsertInlineEq{f_0}是\InsertInlineEq{N+\frac{1}{2}}倍的\InsertInlineEq{B_0},这样\InsertInlineEq{N}可以使用sinc函数的频移来表示，剩下来的\InsertInlineEq{\frac{1}{2}}就是一个2倍于\InsertInlineEq{2B_0}的信号，可以用\InsertInlineEq{1/4B_0}的间隔去采样。}
   这样信号\InsertInlineEq{g(x)}就可以用\InsertInlineEq{1/(4B_0)}的采样间隔来获得采样定理下的信号形式：\InsertEqution{3.13}{g(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \cos \left[2 \pi f_{0}\left(x-\frac{k}{4 B_{0}}\right)\right]}
   也可以使用低通采样定理类似的论据得出上述结果，并且有时将其称为带通采样定理。 此结果的中心思想是有效利用以下事实：即使采样间隔比\InsertInlineEq{1/2(f_0+B)}大得多，傅里叶空间中的空白区域也不会导致混叠。上式中的余弦项可以表示为两个指数项的总和，而解调后的包络\InsertInlineEq{a(x)}可以表示为一个采样序列：\InsertEqution{3.14}{a(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \exp \left(-2 \pi f_{0} \frac{k}{4 B_{0}}\right)}
   因此，采样率与复杂包络中的波动相当，而不是最大信号带宽。在以上讨论中暗含了对载波频率\InsertInlineEq{f_0}的了解。正如我们将在下一节中讨论的那样，此结果对于量化信号的自由度非常重要。
   \subsection{信号的自由度：空间带宽积}
   假设我们有一个长度为2L的信号要存储或传输给其他人，需要多少空间？大多数实际信号或图像都是有限范围的，并且严格意义上来讲不能有限长的信号不能同时是带限的。它的傅里叶变换原则上必须在整个频率轴上扩展。因此，带宽的概念需要仔细定义。对于长度在\InsertInlineEq{x:(-L,L)}的信号\InsertInlineEq{g(x)},我们在频率段\InsertInlineEq{f_x:(-B,B)}定义能量集中比\InsertInlineEq{\alpha}为\InsertEqution{3.15}{\alpha=\frac{\int_{-B}^{B} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}{\int_{-\infty}^{\infty} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}}。
-对于带宽的实用的定义为在频率段\InsertInlineEq{fx:(-B,B)}内，能量集中比接近于实际应用要求的1（比如0.999）。需要多少个信号样本才能以相当准确的方式表示它？ 答案是\InsertEqution{2B}{2L}。\InsertInlineEq{N=4BL}的乘积称为空间带宽积，他表示信号的自由度。对于2D信号或者图像这个数是\InsertInlineEq{N^2},即表示图形所需的像素数。
-信号和系统的空间带宽积是两个不同的概念。假设我们的对象是放置在玻片内的生物组织样本，需要在显微镜下观察。活细胞是一个非常复杂的对象，感兴趣的细节可以在分子或者纳米尺度上对应于空间频率的数量级是\InsertInlineEq{10^{9}m^{-1}},则对于一个\InsertInlineEq{1mm\times1mm}物体，空间带宽积为为\InsertInlineEq{(10^-3)^2\times(10^9)^2=10^12}。而观测细胞的系统可以具有小的多的空间带宽积。用于可见光的显微镜的分辨率可能只有\InsertInlineEq{1\mu m}，因此该显微系统的空间带宽积是\InsertInlineEq{(10^-3)^2\times(10^6)^2=10^6}。因此，如果要将CCD相机作为探测器放置在显微镜的后端，则\InsertInlineEq{1000\times1000}像素的传感器芯片就足够了。如果我们在弱光条件下运行，则噪声会使来自每个像素的信号有些不可靠。我们可能需要对传感器芯片进行binning，以便对一个\InsertInlineEq{2\times2}像素块进行平均。因此，生成的图像是\InsertInlineEq{500\times500}像素,减少了可以从系统设置程序中检索到的信息。因此，空间带宽乘积既取决于系统参数，又取决于信噪比。\footnote[1]{这里不太正确，应该是空间带宽积还是这么多，但是信号的置信度下降了，导致可以直接获得的真实信息的量减少了，这种是可以通过其他方法恢复的。}
+对于带宽的实用的定义为在频率段\InsertInlineEq{fx:(-B,B)}内，能量集中比接近于实际应用要求的1（比如0.999）。需要多少个信号样本才能以相当准确的方式表示它？ 答案是\InsertInlineEq{2B\times2L}。\InsertInlineEq{N=4BL}的乘积称为空间带宽积，他表示信号的自由度。对于2D信号或者图像这个数是\InsertInlineEq{N^2},即表示图形所需的像素数。
 
+信号和系统的空间带宽积是两个不同的概念。假设我们的对象是放置在玻片内的生物组织样本，需要在显微镜下观察。活细胞是一个非常复杂的对象，感兴趣的细节可以在分子或者纳米尺度上对应于空间频率的数量级是\InsertInlineEq{10^{9}m^{-1}},则对于一个\InsertInlineEq{1mm\times1mm}物体，空间带宽积为为\InsertInlineEq{(10^-3)^2\times(10^9)^2=10^12}。而观测细胞的系统可以具有小的多的空间带宽积。用于可见光的显微镜的分辨率可能只有\InsertInlineEq{1\mu m}，因此该显微系统的空间带宽积是\InsertInlineEq{(10^-3)^2\times(10^6)^2=10^6}。因此，如果要将CCD相机作为探测器放置在显微镜的后端，则\InsertInlineEq{1000\times1000}像素的传感器芯片就足够了。如果我们在弱光条件下运行，则噪声会使来自每个像素的信号有些不可靠。我们可能需要对传感器芯片进行binning，以便对一个\InsertInlineEq{2\times2}像素块进行平均。因此，生成的图像是\InsertInlineEq{500\times500}像素,减少了可以从系统设置程序中检索到的信息。因此，空间带宽乘积既取决于系统参数，又取决于信噪比。\footnote[1]{这里不太正确，应该是空间带宽积还是这么多，但是信号的置信度下降了，导致可以直接获得的真实信息的量减少了，这种是可以通过其他方法恢复的。}
+\subsection{Slepian(椭球形)函数}
+我们在\RefEq{3.15}中定义了能量集中率，以便对带宽做出实际定义。\InsertInlineEq{\alpha}的最大值问题由香农在1950年提出。Slepian，Pollak和Landau在Bell System Tech的一系列论文中对该问题进行了全面分析。 为了纪念D.Slepianz这类函数被称为Slepianz函数。我们会讨论这些函数一些有趣的性质，然后建立起和采样定理的关联。当我们讨论诸如超分辨或者成像系统的信息承载呢能力是，Slepian函数将会比较有用。
+
+对于一个在\InsertInlineEq{x:(-L,L)}上的函数\InsertInlineEq{g(x)},我们可以利用傅里叶变换将能量集中率\InsertInlineEq{\alpha}表示为：\InsertEqution{3.16}{\alpha=\frac{\int_{-B}^{B} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}{\int_{-\infty}^{\infty} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}}
+我们观察到上述\InsertInlineEq{\alpha}的展开是sinc核的Rayleigh-Ritz系数，则\InsertInlineEq{\alpha}的最大值可以由\InsertInlineEq{2B\lambda_0},\InsertInlineEq{\lambda_0}是以下特征方程的特征值。\InsertEqution{3.17}{\lambda \phi(x)=\int_{-L}^{L} d x^{\prime} \operatorname{sinc}\left[2 B\left(x-x^{\prime}\right)\right] \phi\left(x^{\prime}\right)}通常近似的基函数会按照相应特征值的大小降序排列。对于给定的\InsertInlineEq{L,B}, 最大的\InsertInlineEq{N}个特征方程可以认为是最佳的基。Slepian和他的同事在早期工作中认识到，sinc-kernel的本征函数是扁长球面微分方程的角部分的解在方程\InsertInlineEq{\chi(c)}的离散正值的条件下：\InsertEqution{3.18}{\left(L^{2}-x^{2}\right) \frac{d^{2} \phi}{d x^{2}}-2 x \frac{d \phi}{d x}+\left(\chi-\frac{c^{2} x^{2}}{L^{2}}\right)=0}。参数\InsertInlineEq{c=2\pi LB}被称为香农数，与空间带宽积有关。关于Slepian函数的大多数文献都是基于微分方程\RefEq{3.18}的解及其根据\InsertInlineEq{c}值的渐近解来研究其性质的。我们将基于采样定理采用不同的方法。基于微分方程解的讨论在某种程度上是临时的，与诸如采样定理固有相关的空间带宽积之类的思想没有简单的联系。
+
+我们注意到\RefEq{3.17}中的特征值是第二类其次Fredholm积分方程，该方程的核是厄米对称且平方可积的。此外这个核还是正定的：\InsertEqution{3.19}{\begin{array}{l}
+  \int_{-L}^{L} \int_{-L}^{L} d x d x^{\prime} \operatorname{sinc}\left[2 B\left(x-x^{\prime}\right)\right] g(x) g^{*}\left(x^{\prime}\right) \\
+  \quad=\frac{1}{2 B} \int_{-B}^{B} d f_{x}\left|G\left(f_{x}\right)\right|^{2} \\
+  \quad \geq 0
+  \end{array}}
+  对于任意平方可积函数\InsertInlineEq{g(x)}。当\InsertInlineEq{g(x)}等于零时，\RefEq{3.19}的等号成立，因此，sinc核的特征值为正。我们将首先表明，sinc核的本征函数满足采样定理，因此受到带宽限制。我们已经注意到，sinc内核本身是有带宽限制的，因此具有以下采样扩展：
+  \InsertEqution{3.20}{\operatorname{sinc}\left[2 B\left(x-x^{\prime}\right)\right]=\sum_{m=-\infty}^{\infty} \operatorname{sinc}(2 B x-m) \operatorname{sinc}\left(2 B x^{\prime}-m\right)}。对\RefEq{3.17}使用sinc核展开可以得到：\InsertEqution{3.21}{\begin{aligned}
+    \lambda \phi(x) &=\int_{-L}^{L} d x^{\prime} \sum_{m=-\infty}^{\infty} \operatorname{sinc}(2 B x-m) \operatorname{sinc}\left(2 B x^{\prime}-m\right) \phi\left(x^{\prime}\right) \\
+    &=\sum_{m=-\infty}^{\infty}\operatorname{sinc}(2 B x-m)\times(\int_{-L}^{L} d x^{\prime} \operatorname{sinc}\left(2 B x^{\prime}-m\right) \phi\left(x^{\prime}\right))
+    \\&=\lambda \sum_{m=-\infty}^{\infty} \phi\left(\frac{m}{2 B}\right) \operatorname{sinc}(2 B x-m)
+    \end{aligned}}
+  对\RefEq{3.17}可以写成\InsertEqution{3.22}{\begin{aligned}
+    \lambda \phi\left(\frac{m}{2 B}\right) &=\int_{-L}^{L} d x^{\prime} \operatorname{sinc}\left(2 B x^{\prime}-m\right) \phi\left(x^{\prime}\right) \\
+    &=\int_{-L}^{L} d x^{\prime} \operatorname{sinc}\left(2 B x^{\prime}-m\right) \sum_{n=-\infty}^{\infty} \phi\left(\frac{n}{2 B}\right) \operatorname{sinc}\left(2 B x^{\prime}-n\right) \\
+    &=\sum_{n=-\infty}^{\infty} A_{m n}^{(0)} \phi\left(\frac{n}{2 B}\right)
+    \end{aligned}}
+  其中矩阵\InsertInlineEq{A^{(0)}}的元素可以定义为：\InsertEqution{3.23}{A_{m n}^{(0)}=\int_{-L}^{L} d x^{\prime} \operatorname{sinc}\left(2 B x^{\prime}-m\right) \operatorname{sinc}\left(2 B x^{\prime}-n\right)}
+可以发现，sinc核的连续特征值问题因此等效于矩阵\InsertInlineEq{A^{(0)}}的离散特征值问题。连续和离散问题共享相同的特征值 此外，矩阵\InsertInlineEq{A^{(0)}}的特征向量与连续长球状函数的Nyquist样本相同。 因此，可以通过对离散特征向量进行正弦插值来获得连续函数。
+\subsubsection{\InsertInlineEq{A^{(0)}}的性质}
+为了简洁起见，我们将矩阵\InsertInlineEq{A^{(0)}}的离散特征向量表示为
+\InsertEqution{?1}{u_{n}=\left[\ldots \phi_{n}\left(\frac{m}{2 B}\right) \ldots\right]^{T}},符号T是行向量的转置。\InsertInlineEq{A^{(0)}}是实对称的所以他的特征值和特征向量是实数。我们将连续函数\InsertInlineEq{\phi_n(x)}归一化为\InsertInlineEq{x:(-\infty,\infty)},可以写成:\InsertEqution{3.24}{\int_{-\infty}^{\infty} d x \phi_{n}^{2}(x)=1 | \bmod e l s \frac{1}{2 B} \sum_{m=-\infty}^{\infty} \phi_{n}^{2}\left(\frac{m}{2 B}\right)}。\RefEq{3.24}来自以下事实，\InsertInlineEq{\phi_n(x)}根据\RefEq{3.21}扩展采样，进一步使用了sinc函数的正交性\RefEq{3.7}。\InsertInlineEq{A^{(0)}}是关于元素\InsertInlineEq{A^{(0)}_{00}}是对称的。众所周知，此类矩阵的特征向量具有确定的奇偶性-它们是偶数或奇数。因此，通过离散特征向量的正插值获得的连续特征函数也具有一定的奇偶性。
+
+矩阵\InsertInlineEq{A^{(0)}}可以被分解为\InsertEqution{3.25}{A^{(0)}=U A_{d}^{(0)} U^{T}}。其中\InsertInlineEq{A^{(0)_d}}是对角矩阵，特征值\InsertInlineEq{\lambda_n}分布在对角线上，矩阵\InsertInlineEq{U}具有特征向量\InsertInlineEq{u_n}。此外特征向量是正交的:\InsertEqution{3.26}{U^{T} U=2 B \hat{\mathbf{1}}=U U^{T}}利用这些恒等式\InsertInlineEq{\phi_n(\frac{m}{2B})}可以显式地获得以下关系：正交性\InsertEqution{3.27}{\sum_{m=-\infty}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{l}\left(\frac{m}{2 B}\right)=2 B \delta_{n l}}完备性\footnote[1]{完备性表示可以用这个基表示整个空间}\InsertEqution{3.28}{\sum_{n=0}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{n}\left(\frac{k}{2 B}\right)=2 B \delta_{m k}}
+矩阵\InsertInlineEq{A^{(0)}}的结构非常有趣由于矩阵元素被定义为移位正弦函数乘积上的定积分，因此只有大约\InsertInlineEq{(2B)(2L)}个矩阵元素沿着以矩阵元素为\InsertInlineEq{A^{(0)}_{00}}中心的矩阵对角线是有效的。这解释了sinc核的一个众所周知的性质，即问题的最高特征值只有大约\InsertInlineEq{4BL}是显著的。这对于使用prolate函数的信号表示有着有趣的含义。\InsertPic{14}{F3.2}{\InsertInlineEq{L=1,B=5/\pi}时，使用基于采样定理的方法计算的前8个prolate函数}\InsertPic{15}{F3.3}{\InsertInlineEq{L=1,B=5/\pi}时，sinc核函数的前10个特征值}
+在\RefFig{3.2}和\RefFig{3.3}中我们展示了使用基于采样定理的方法分别计算prolate函数及其对应的特征值。使用以元素\InsertInlineEq{A^{(0)}_{00}}为中心的矩阵\InsertInlineEq{A^{(0)}}的\InsertInlineEq{101\times101}近似值，并根据\RefEq{3.23}中的定义使用标准数值积分方法计算矩阵元素。然后，对由此获得的离散特征向量进行内插，以获得连续的特征函数。 总的来说，我们观察到第n个长函数在间隔\InsertInlineEq{x:(-L,L)}中有n个过0点。对于\InsertInlineEq{n>4BL}阶的函数，这似乎是违反直觉的，其中零交叉点的数量超过了空间带宽积，尽管相应的长函数仍在无限间隔内被带宽限制。与空间带宽乘积相比，这样的函数在有限的时间间隔内具有更多的零交叉，实际上被称为“超振荡”。我们进一步注意到，当索引n超过\InsertInlineEq{4BL}时，相应的函数函数中的大多数能量都集中在间隔\InsertInlineEq{x:(-L,L)}之外。
+
+我们将陈述prolate函数的一些有趣特性，这些特性可以很容易地从\RefEq{3.27}和\RefEq{3.28}中的离散正交性和完整性关系中得出。
+
+1.对偶正交性:曲线函数在\InsertInlineEq{-\infty,\infty}以及正交域\InsertInlineEq{x:(-L,L)}用于定义\InsertEqution{3.29}{\int_{-\infty}^{\infty} d x \phi_{n}(x) \phi_{m}(x)=\delta_{m, n}}
+\InsertEqution{3.30}{\int_{-L}^{L}d x \phi_{n}(x) | \phi_{m}(x)=\left(2 B \lambda_{n}\right) \delta_{m, n}}
+如果使用\InsertInlineEq{\phi_n(x)}和\InsertInlineEq{\phi_m(x)}的采样扩展，然后按照\RefEq{3.27}，则第一个恒等式很容易证明。\RefEq{3.30}的有限区间的第二正交性可以证明如下：\InsertEqution{3.31}{\begin{array}{l}
+  \int_{-L}^{L} d x \phi_{n}(x) \phi_{m}(x) \\
+  =\sum\limits_{k=-\infty}^{\infty} f_{n}\left(\frac{k}{2 B}\right) \int_{-L}^{L} d x \operatorname{sinc}(2 B x-k) \phi_{m}(x) \\
+  =\lambda_{m} \sum\limits_{k=-\infty}^{\infty} \phi_{n}\left(\frac{k}{2 B}\right) \phi_{m}\left(\frac{k}{2 B}\right) \\
+  =2 B \lambda_{m} \delta_{m, n}
+  \end{array}}
+
+  2.完备性：Prolate函数在函数带宽限制为\InsertInlineEq{f_x:(-B,B)}的情况下在\InsertInlineEq{-\infty,\infty}上具有正交基础，而在\InsertInlineEq{x:(-L,L)}中的平方可积函数具有完整的正交基础。
+
+  在考虑带限外推之类的问题时，我们将使用正交性和完整性属性。通常，在本书的整个讨论中，当讨论成像系统的信息传输功能时，我们将有各种场合引用Prolate函数。我们注意到，基于采样定理的曲线函数的方法通常同样适用于与带限核相关的特征值问题，并且在一般情况下，可以证明与Prolate椭球体类似的一些有趣的数学关系。
 
   \end{sloppypar}
 \end{document}
