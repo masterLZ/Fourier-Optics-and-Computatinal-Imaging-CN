@@ -13,9 +13,13 @@
 \usepackage[normalem]{ulem} 
 \usepackage{amsmath}%加入对齐包
 \definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
+%公式、图片随章节改变
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
 %自定义函数
 \def\CodingInline#1{\colorbox{shadecolor}{\color{black}#1}}%内联代码
-\newcommand {\InsertPic}[3]{\begin{figure}[htbp] \label{#2}\centering \includegraphics[width=1\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare_img_#1.jpg}\caption{#3} \end{figure}}%插入图片
+\newcommand {\InsertPic}[3]{\begin{figure}[htbp]\centering \includegraphics[width=1\textwidth]{D:/学习文档/傅里叶光学/翻译/tu/Fourier-Optics-and-Computational-Khare_img_#1.jpg}\caption{#3}  \label{#2}\end{figure}}%插入图片
 \def\CodingBlock#1{\begin{shaded} \noindent#1 \end{shaded}}
 \def\Emphasize#1{\textcolor[rgb]{1,0,0}{#1}}
 \newcommand{\InsertEqution}[2]{\begin{equation}
@@ -25,6 +29,8 @@
 \newcommand{\RefEq}[1]{Eq.\ref{#1}}
 \newcommand{\InsertInlineEq}[1]{$#1$}
 \newcommand{\RefFig}[1]{图 \ref{#1}}
+\newcommand{\InsertItem}[1]{\begin{enumerate} #1 \end{enumerate}}
+
 %正文区
 %begin end 用于指定环境
 \begin{document}
@@ -128,7 +134,7 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
 
 矩阵\InsertInlineEq{A^{(0)}}可以被分解为\InsertEqution{3.25}{A^{(0)}=U A_{d}^{(0)} U^{T}}。其中\InsertInlineEq{A^{(0)_d}}是对角矩阵，特征值\InsertInlineEq{\lambda_n}分布在对角线上，矩阵\InsertInlineEq{U}具有特征向量\InsertInlineEq{u_n}。此外特征向量是正交的:\InsertEqution{3.26}{U^{T} U=2 B \hat{\mathbf{1}}=U U^{T}}利用这些恒等式\InsertInlineEq{\phi_n(\frac{m}{2B})}可以显式地获得以下关系：正交性\InsertEqution{3.27}{\sum_{m=-\infty}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{l}\left(\frac{m}{2 B}\right)=2 B \delta_{n l}}完备性\footnote[1]{完备性表示可以用这个基表示整个空间}\InsertEqution{3.28}{\sum_{n=0}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{n}\left(\frac{k}{2 B}\right)=2 B \delta_{m k}}
 矩阵\InsertInlineEq{A^{(0)}}的结构非常有趣由于矩阵元素被定义为移位正弦函数乘积上的定积分，因此只有大约\InsertInlineEq{(2B)(2L)}个矩阵元素沿着以矩阵元素为\InsertInlineEq{A^{(0)}_{00}}中心的矩阵对角线是有效的。这解释了sinc核的一个众所周知的性质，即问题的最高特征值只有大约\InsertInlineEq{4BL}是显著的。这对于使用prolate函数的信号表示有着有趣的含义。\InsertPic{14}{F3.2}{\InsertInlineEq{L=1,B=5/\pi}时，使用基于采样定理的方法计算的前8个prolate函数}\InsertPic{15}{F3.3}{\InsertInlineEq{L=1,B=5/\pi}时，sinc核函数的前10个特征值}
-在\RefFig{3.2}和\RefFig{3.3}中我们展示了使用基于采样定理的方法分别计算prolate函数及其对应的特征值\footnote{求矩阵\InsertInlineEq{A_{mn}^{(0)}的特征值和特征向量，每个特征向量插值后就是prolate函数}}。使用以元素\InsertInlineEq{A^{(0)}_{00}}为中心的矩阵\InsertInlineEq{A^{(0)}}的\InsertInlineEq{101\times101}近似值，并根据\RefEq{3.23}中的定义使用标准数值积分方法计算矩阵元素。然后，对由此获得的离散特征向量进行内插，以获得连续的特征函数。 总的来说，我们观察到第n个长函数在间隔\InsertInlineEq{x:(-L,L)}中有n个过0点。对于\InsertInlineEq{n>4BL}阶的函数，这似乎是违反直觉的，其中零交叉点的数量超过了空间带宽积，尽管相应的长函数仍在无限间隔内被带宽限制。与空间带宽乘积相比，这样的函数在有限的时间间隔内具有更多的零交叉，实际上被称为“超振荡”。我们进一步注意到，当索引n超过\InsertInlineEq{4BL}时，相应的函数函数中的大多数能量都集中在间隔\InsertInlineEq{x:(-L,L)}之外。
+在\RefFig{F3.2}和\RefFig{F3.3}中我们展示了使用基于采样定理的方法分别计算prolate函数及其对应的特征值\footnote{求矩阵\InsertInlineEq{A_{mn}^{(0)}的特征值和特征向量，每个特征向量插值后就是prolate函数}}。使用以元素\InsertInlineEq{A^{(0)}_{00}}为中心的矩阵\InsertInlineEq{A^{(0)}}的\InsertInlineEq{101\times101}近似值，并根据\RefEq{3.23}中的定义使用标准数值积分方法计算矩阵元素。然后，对由此获得的离散特征向量进行内插，以获得连续的特征函数。 总的来说，我们观察到第n个长函数在间隔\InsertInlineEq{x:(-L,L)}中有n个过0点。对于\InsertInlineEq{n>4BL}阶的函数，这似乎是违反直觉的，其中零交叉点的数量超过了空间带宽积，尽管相应的长函数仍在无限间隔内被带宽限制。与空间带宽乘积相比，这样的函数在有限的时间间隔内具有更多的零交叉，实际上被称为“超振荡”。我们进一步注意到，当索引n超过\InsertInlineEq{4BL}时，相应的函数函数中的大多数能量都集中在间隔\InsertInlineEq{x:(-L,L)}之外。
 
 我们将陈述prolate函数\footnote{\InsertInlineEq{\phi_n(x)}}的一些有趣特性，这些特性可以很容易地从\RefEq{3.27}和\RefEq{3.28}中的离散正交性和完整性关系中得出。
 
@@ -151,6 +157,52 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
   在结束本章讨论时，我们注意到通过sinc集合或Slepian函数基础进行的采样彼此等效。诸如小波之类的相关领域中重要发展的起源可以追溯到本章所涵盖的内容。
 \section{快速傅立叶变换介绍}
 \subsection{定义}
+本书将不时遇到傅立叶变换，对于学生和从业人员来说，重要的是要对数值例程或函数具有基本的操作性理解，这些数字例程或函数可用于对离散采样的信号和图像实施傅立叶变换。 本章决不讨论离散傅立叶变换和快速傅立叶变换算法的详细信息，对于这些算法，已有很好的文献资料。此处的目的是提供足够的信息，以便在将标准计算工具或库用于FFT操作时，用户可以理解结果。 沿途还指出了有关使用2D傅里叶变换函数模拟光学成像系统的一些重要方面。
+
+通过对第三章中所讨论的采样思想的介绍，我们现在可以用采样来在空间带宽积\InsertInlineEq{N\approx4BL}表示长度超过\InsertInlineEq{2L}有效带宽超过\InsertInlineEq{2B}的信号\InsertInlineEq{g(0/2B),g(1/2B),...,g((N-1)/2B)}。离散的傅里叶变换可以被定义为：\InsertEqution{4.1}{G\left(\frac{m}{2 L}\right)=\sum_{n=0}^{N-1} g\left(\frac{n}{2 B}\right) \exp (-i 2 \pi m n / N)}
+相应的傅里叶逆变换可以被定义为\InsertEqution{4.2}{g\left(\frac{n}{2 B}\right)=\frac{1}{N} \sum_{m=0}^{N-1} G\left(\frac{m}{2 L}\right) \exp (i 2 \pi m n / N)}
+我们注意到，当信号仅通过离散样本集定义在\InsertInlineEq{x:(-L,L)}上时，上述离散傅里叶变换操作近似于傅里叶变换的连续积分形式。空域样本的周期为\InsertInlineEq{1/(2B)}，而频域周期为\InsertInlineEq{1/(2L)}。在大多数情况下，通常会省略\InsertInlineEq{2B,2L},但在这里我们保留这个参数。可以观察到正向和反向DFT是线性变换，可以以矩阵形式编写。 例如使用符号\InsertEqution{4.3}{\omega=\exp (i 2 \pi / N)},对于N个以1为开始的变换\RefEq{4.1}可以写成\InsertEqution{4.4}{\mathbf{G}=\mathbf{F} \mathbf{g}}或者\InsertEqution{4.5}{\left(\begin{array}{c}
+  G\left(\frac{0}{2 L}\right) \\
+  G\left(\frac{1}{2 L}\right) \\
+  \cdot \\
+  \cdot \\
+  G\left(\frac{N-1}{2 L}\right)
+  \end{array}\right)=\left(\begin{array}{cccc}
+  1 & 1 & \cdots & 1 \\
+  1 & \omega^{-1} & \cdots & \omega^{N-1} \\
+  \cdot & \cdot & \cdots & \cdot \\
+  \cdot & \cdot & \cdots & \cdot \\
+  & \cdot & \cdots & \cdot \\
+  1 & \omega^{-(N-1)} & \cdots & \omega^{-(N-1)^{2}}
+  \end{array}\right)\left(\begin{array}{c}
+  g\left(\frac{0}{2 \beta}\right) \\
+  g\left(\frac{1}{2 B}\right) \\
+  \cdot \\
+  \cdot \\
+  g\left(\frac{N-1}{2 B}\right)
+  \end{array}\right)}
+我们可以注意到\InsertInlineEq{\omega}满足\InsertEqution{4.6}{\omega^{(N-m)}=\omega^{-m}}
+结果，频率\InsertInlineEq{0/(2L),1/(2L),...,(N-1))/(2L)}形成离散傅立叶变换\InsertInlineEq{G}的自变量可以被重新排序为正和负频率。用于定义正和负频率的典型约定如下：
+\InsertItem{\item \InsertInlineEq{N}为基数：\InsertInlineEq{\nu = 0/(2L)}是零频率或dc项，\InsertInlineEq{\nu=1/(2L)}到\InsertInlineEq{\nu=(N/2)/2L}被视为正频率，而\InsertInlineEq{\nu=(N/2)+1/(2L)}到\InsertInlineEq{\nu=(N-1)/2L}被视为负频率。
+\item \InsertInlineEq{N}为偶数，\InsertInlineEq{\nu = 0/(2L)}是零频率或dc项，\InsertInlineEq{\nu=1/(2L)}到\InsertInlineEq{\nu=((N+1)/2)/2L}被视为正频率，而\InsertInlineEq{\nu=((N+3)/2)/2L}到\InsertInlineEq{\nu=(N-1)/2L}被视为负频率。}
+定义了负频率之后，根据\RefEq{4.6}的\InsertInlineEq{\omega}的性质，\InsertInlineEq{\nu=(N-1)/2L}等效于\InsertInlineEq{\nu=-1/2L}，并依此类推。
+\subsection{使用2D快速傅立叶变换解决光学问题}
+在不考虑变换矩阵\InsertInlineEq{F}的任何属性的情况下，我们注意到计算离散傅里叶变换将需要\InsertInlineEq{N^2}乘法运算。Cooley和Tukey在1965年发布了一种利用F矩阵的对称性并将乘法运算的数量减少到\InsertInlineEq{N\log N}数量级的算法时，取得了长足的进步。
+  用于计算DFT的相应算法称为快速傅立叶变换(FFT)。FFT算法的思想可以追溯到高斯（Gauss）的出版物，但是在Cooley和Tukey的工作之后，这一意义得到了重视。 FFT现在已成为基准，在计算复杂度方面经常将其与其他算法进行比较。 我们将不提供FFT理论背后的详细讨论，而只会向读者介绍使用FFT算法的操作方面，而FFT算法现在可以在广泛使用的计算工具（例如MATLAB，SciLab，NumPy等）中使用。
+
+  正如我们将在本书的后续章节中看到的那样，傅立叶变换自然发生在光波传播，光学信息处理方法等的研究中。在光学和其他成像系统进行建模，分析和合成的数字处理方法中广泛的用到FFT算法。在这些应用中，重要的是要了解任何标准二维FFT工具提供的结果的含义以及正确使用功能，以便从物理学的角度来看这些结果有意义。
+
+  我们将提供2D rect函数的2D傅里叶变换的计算示例。\InsertPic{16}{F4.1}{2维矩形函数的2维傅里叶变换。(a)rect函数；傅里叶变换后的振幅是（b）相位为（c）。相位函数中的暗像素和亮像素分别对应于0和\InsertInlineEq{\pi}的相位值。}如\RefFig{F4.1}所示，在大小为\InsertInlineEq{255\times255}的2D网格上定义了大小等于11个像素的rect函数。
+
+  图\RefFig{F4.1}（b）和（c）分别显示了通过简单应用上述标准计算工具中的函数\InsertInlineEq{fft2}获得的图像的幅度和相位。 结果看起来不像预期的2D Sinc函数。我们注意到，sinc函数的中央波瓣现在分布在所得图像的拐角附近。这是因为标准FFT工具的零频分量在合成矢量的开头而不是其中心处。一个常见的解决方法是在结果上使用fftshift功能，该功能可使零频率回到图像中心。\InsertPic{17}{F4.2}{在2D矩形函数对象上应用序列\InsertInlineEq{fftshift(fft2(...))}的结果}
+  在rect函数上应用序列\InsertInlineEq{fftshift(fft2(...))}分别得到如\RefFig{F4.2}（a）和（b）所示的幅度和相位这里的幅度部分看起来很合理，但是相位仍然不是期望的正弦函数。这个结果可以理解如下,将傅立叶变换计算为：\InsertEqution{4.7}{\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} d x d y \operatorname{rect}\left(\frac{x}{a}, \frac{y}{a}\right) \exp \left[-i 2 \pi\left(f_{x} x+f_{y} y\right)\right]}应用于rect函数中心的正确相位值对应于零（因为\InsertInlineEq{x=0,y=0}）。但是，根据标准FFT约定，该点的相位应用于图像的一角。 因此，必须使用标准的\InsertInlineEq{ifftshift}函数对要进行傅里叶变换的初始图像进行适当的修改，该函数通过交换象限将图像的中心移到角落。因此，要在大多数编程平台中2D FFT的适当顺序对于从物理角度来看有意义的结果（例如在描述衍射现象）中有意义，应该使用的计算顺序是\Emphasize{\InsertInlineEq{fftshift(fft2(ifftshift(...)))}}。
+  \InsertPic{18}{F4.3}{在2D矩形函数对象上应用序列\InsertInlineEq{fftshift(fft2(ifftshift(...)))}的结果}
+  用此序列计算出的rect函数的2D FFT的幅度和相位如图\RefFig{F4.3}(a),(b)所示。现在，振幅和相位都是光学中的常规要求。因此，合适的逆傅里叶变换可以是\Emphasize{\InsertInlineEq{fftshift(ifft2(ifftshift(...)))}}。
+
+  函数\InsertInlineEq{fftshift}和\InsertInlineEq{ifftshift}对于偶数维矢量通常是相同的，但对于奇数维矢量则相差一个像素。而无论所涉及的矢量的维数是偶数还是奇数，上述正向和反向FFT的两个序列都可以按照光学的标准惯例用于产生正确的相位行为。
+  我们已经为研究人员常用的计算工具提供了FFT例程的操作介绍。 此处通过示例说明了有关\InsertInlineEq{fftshift}和\InsertInlineEq{ifftshift}函数以及\InsertInlineEq{fft}例程的用法的细微之处。 这些主题已在此处进行了讨论，因为当初学者或学生开始研究与光学成像和衍射现象有关的基于FFT的仿真时，它们似乎是常见的错误来源。
+
+\section{线性系统的形式和成像逆问题介绍}
 
   \end{sloppypar}
 \end{document}
