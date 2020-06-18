@@ -94,7 +94,7 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
   \end{aligned}}
   如果现在将完整性关系用于\InsertInlineEq{sinc[2B(x-x')]}和\RefEq{3.8}的关系，就得出了采样定理。因此，sinc基可以表示每个带限函数，可以将表达式\InsertInlineEq{sinc[2B(x-x')]}视为\InsertInlineEq{\delta(x-x')}的带限版本。
   \subsection{对载频信号的采样}
-  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{13}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此包络的有效带宽和载频的比值\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于一些给定的整数\InsertInlineEq{N}(可能是最大值对于确定的\InsertInlineEq{f_0,B}),\footnote[1]{这里意思是说对于给定的\InsertInlineEq{B},总可以找到一个稍微大一些的值\InsertInlineEq{B_0},使其满足\InsertInlineEq{f_0}是\InsertInlineEq{N+\frac{1}{2}}倍的\InsertInlineEq{B_0},这样\InsertInlineEq{N}可以使用sinc函数的频移来表示，剩下来的\InsertInlineEq{\frac{1}{2}}就是一个2倍于\InsertInlineEq{2B_0}的信号，可以用\InsertInlineEq{1/4B_0}的间隔去采样。}
+  有时通过陈述僵化的规则来简单地解释香农采样定理具有误导性，即正弦信号每个正弦周期需要两个采样。 因为如果知道我们采样的是正弦曲线，那么仅应从知道其频率，幅度和初始相位的角度就可以确定波形。 实际上，在通信中遇到的一类重要信号，窄带光场表示和光学干涉成像等形式的情况下，也会出现类似情况。这种情况可以表示为：\InsertEqution{3.11}{g(x)=a(x) \exp \left(i 2 \pi f_{0} x\right)+a^{*}(x) \exp \left(-i 2 \pi f_{0} x\right)}。这里\InsertInlineEq{a(x)}是信号的复振幅包络，\InsertInlineEq{f_0}是载频。此类信号在大多数情况下，包络\InsertInlineEq{a(x)}的有效带宽\InsertInlineEq{2B}是远小于载频\InsertInlineEq{f_0}的，典型的载频信号的傅里叶幅度如图\InsertPic{13}{F3.1}{\InsertInlineEq{\left|G(f_x)\right|}的傅里叶频谱强度}。因此包络的有效带宽和载频的比值\InsertEqution{3.12}{\frac{f_{0}}{2 B} \geq \frac{f_{0}}{2 B_{0}}=N+\frac{1}{2}},对于一些给定的整数\InsertInlineEq{N}(可能是最大值对于确定的\InsertInlineEq{f_0,B}),\footnote{这里意思是说对于给定的\InsertInlineEq{B},总可以找到一个稍微大一些的值\InsertInlineEq{B_0},使其满足\InsertInlineEq{f_0}是\InsertInlineEq{N+\frac{1}{2}}倍的\InsertInlineEq{B_0},这样\InsertInlineEq{N}可以使用sinc函数的频移来表示，剩下来的\InsertInlineEq{\frac{1}{2}}就是一个2倍于\InsertInlineEq{2B_0}的信号，可以用\InsertInlineEq{1/4B_0}的间隔去采样。}
   这样信号\InsertInlineEq{g(x)}就可以用\InsertInlineEq{1/(4B_0)}的采样间隔来获得采样定理下的信号形式：\InsertEqution{3.13}{g(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \cos \left[2 \pi f_{0}\left(x-\frac{k}{4 B_{0}}\right)\right]}
   也可以使用低通采样定理类似的论据得出上述结果，并且有时将其称为带通采样定理。 此结果的中心思想是有效利用以下事实：即使采样间隔比\InsertInlineEq{1/2(f_0+B)}大得多，傅里叶空间中的空白区域也不会导致混叠。上式中的余弦项可以表示为两个指数项的总和，而解调后的包络\InsertInlineEq{a(x)}可以表示为一个采样序列：\InsertEqution{3.14}{a(x)=\sum_{k=-\infty}^{\infty} g\left(\frac{k}{4 B_{0}}\right) \operatorname{sinc}\left[2 B_{0}\left(x-\frac{k}{4 B_{0}}\right)\right] \exp \left(-2 \pi f_{0} \frac{k}{4 B_{0}}\right)}
   因此，采样率与复杂包络中的波动相当，而不是最大信号带宽。在以上讨论中暗含了对载波频率\InsertInlineEq{f_0}的了解。正如我们将在下一节中讨论的那样，此结果对于量化信号的自由度非常重要。
@@ -102,7 +102,7 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
   假设我们有一个长度为2L的信号要存储或传输给其他人，需要多少空间？大多数实际信号或图像都是有限范围的，并且严格意义上来讲不能有限长的信号不能同时是带限的。它的傅里叶变换原则上必须在整个频率轴上扩展。因此，带宽的概念需要仔细定义。对于长度在\InsertInlineEq{x:(-L,L)}的信号\InsertInlineEq{g(x)},我们在频率段\InsertInlineEq{f_x:(-B,B)}定义能量集中比\InsertInlineEq{\alpha}为\InsertEqution{3.15}{\alpha=\frac{\int_{-B}^{B} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}{\int_{-\infty}^{\infty} d f_{x}\left|G\left(f_{x}\right)\right|^{2}}}。
 对于带宽的实用的定义为在频率段\InsertInlineEq{fx:(-B,B)}内，能量集中比接近于实际应用要求的1（比如0.999）。需要多少个信号样本才能以相当准确的方式表示它？ 答案是\InsertInlineEq{2B\times2L}。\InsertInlineEq{N=4BL}的乘积称为空间带宽积，他表示信号的自由度。对于2D信号或者图像这个数是\InsertInlineEq{N^2},即表示图形所需的像素数。
 
-信号和系统的空间带宽积是两个不同的概念。假设我们的对象是放置在玻片内的生物组织样本，需要在显微镜下观察。活细胞是一个非常复杂的对象，感兴趣的细节可以在分子或者纳米尺度上对应于空间频率的数量级是\InsertInlineEq{10^{9}m^{-1}},则对于一个\InsertInlineEq{1mm\times1mm}物体，空间带宽积为为\InsertInlineEq{(10^-3)^2\times(10^9)^2=10^12}。而观测细胞的系统可以具有小的多的空间带宽积。用于可见光的显微镜的分辨率可能只有\InsertInlineEq{1\mu m}，因此该显微系统的空间带宽积是\InsertInlineEq{(10^-3)^2\times(10^6)^2=10^6}。因此，如果要将CCD相机作为探测器放置在显微镜的后端，则\InsertInlineEq{1000\times1000}像素的传感器芯片就足够了。如果我们在弱光条件下运行，则噪声会使来自每个像素的信号有些不可靠。我们可能需要对传感器芯片进行binning，以便对一个\InsertInlineEq{2\times2}像素块进行平均。因此，生成的图像是\InsertInlineEq{500\times500}像素,减少了可以从系统设置程序中检索到的信息。因此，空间带宽乘积既取决于系统参数，又取决于信噪比。\footnote[1]{这里不太正确，应该是空间带宽积还是这么多，但是信号的置信度下降了，导致可以直接获得的真实信息的量减少了，这种是可以通过其他方法恢复的。}
+信号和系统的空间带宽积是两个不同的概念。假设我们的对象是放置在玻片内的生物组织样本，需要在显微镜下观察。活细胞是一个非常复杂的对象，感兴趣的细节可以在分子或者纳米尺度上对应于空间频率的数量级是\InsertInlineEq{10^{9}m^{-1}},则对于一个\InsertInlineEq{1mm\times1mm}物体，空间带宽积为为\InsertInlineEq{(10^-3)^2\times(10^9)^2=10^12}。而观测细胞的系统可以具有小的多的空间带宽积。用于可见光的显微镜的分辨率可能只有\InsertInlineEq{1\mu m}，因此该显微系统的空间带宽积是\InsertInlineEq{(10^-3)^2\times(10^6)^2=10^6}。因此，如果要将CCD相机作为探测器放置在显微镜的后端，则\InsertInlineEq{1000\times1000}像素的传感器芯片就足够了。如果我们在弱光条件下运行，则噪声会使来自每个像素的信号有些不可靠。我们可能需要对传感器芯片进行binning，以便对一个\InsertInlineEq{2\times2}像素块进行平均。因此，生成的图像是\InsertInlineEq{500\times500}像素,减少了可以从系统设置程序中检索到的信息。因此，空间带宽乘积既取决于系统参数，又取决于信噪比。\footnote{这里不太正确，应该是空间带宽积还是这么多，但是信号的置信度下降了，导致可以直接获得的真实信息的量减少了，这种是可以通过其他方法恢复的。}
 \subsection{Slepian(椭球形)函数}
 我们在\RefEq{3.15}中定义了能量集中率，以便对带宽做出实际定义。\InsertInlineEq{\alpha}的最大值问题由香农在1950年提出。Slepian，Pollak和Landau在Bell System Tech的一系列论文中对该问题进行了全面分析。 为了纪念D.Slepianz这类函数被称为Slepianz函数。我们会讨论这些函数一些有趣的性质，然后建立起和采样定理的关联。当我们讨论诸如超分辨或者成像系统的信息承载呢能力是，Slepian函数将会比较有用。
 
@@ -132,7 +132,7 @@ sinc基集合的完备性可以很简单的证明，观察到：\InsertEqution{3
 为了简洁起见，我们将矩阵\InsertInlineEq{A^{(0)}}的离散特征向量表示为
 \InsertEqution{?1}{u_{n}=\left[\ldots \phi_{n}\left(\frac{m}{2 B}\right) \ldots\right]^{T}},符号T是行向量的转置。\InsertInlineEq{A^{(0)}}是实对称的所以他的特征值和特征向量是实数。我们将连续函数\InsertInlineEq{\phi_n(x)}归一化为\InsertInlineEq{x:(-\infty,\infty)},可以写成:\InsertEqution{3.24}{\int_{-\infty}^{\infty} d x \phi_{n}^{2}(x)=1 = \frac{1}{2 B} \sum_{m=-\infty}^{\infty} \phi_{n}^{2}\left(\frac{m}{2 B}\right)}。\RefEq{3.24}来自以下事实，\InsertInlineEq{\phi_n(x)}根据\RefEq{3.21}扩展采样，进一步使用了sinc函数的正交性\RefEq{3.7}。\InsertInlineEq{A^{(0)}}是关于元素\InsertInlineEq{A^{(0)}_{00}}是对称的。众所周知，此类矩阵的特征向量具有确定的奇偶性-它们是偶数或奇数。因此，通过离散特征向量的正插值获得的连续特征函数也具有一定的奇偶性。
 
-矩阵\InsertInlineEq{A^{(0)}}可以被分解为\InsertEqution{3.25}{A^{(0)}=U A_{d}^{(0)} U^{T}}。其中\InsertInlineEq{A^{(0)_d}}是对角矩阵，特征值\InsertInlineEq{\lambda_n}分布在对角线上，矩阵\InsertInlineEq{U}具有特征向量\InsertInlineEq{u_n}。此外特征向量是正交的:\InsertEqution{3.26}{U^{T} U=2 B \hat{\mathbf{1}}=U U^{T}}利用这些恒等式\InsertInlineEq{\phi_n(\frac{m}{2B})}可以显式地获得以下关系：正交性\InsertEqution{3.27}{\sum_{m=-\infty}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{l}\left(\frac{m}{2 B}\right)=2 B \delta_{n l}}完备性\footnote[1]{完备性表示可以用这个基表示整个空间}\InsertEqution{3.28}{\sum_{n=0}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{n}\left(\frac{k}{2 B}\right)=2 B \delta_{m k}}
+矩阵\InsertInlineEq{A^{(0)}}可以被分解为\InsertEqution{3.25}{A^{(0)}=U A_{d}^{(0)} U^{T}}。其中\InsertInlineEq{A^{(0)_d}}是对角矩阵，特征值\InsertInlineEq{\lambda_n}分布在对角线上，矩阵\InsertInlineEq{U}具有特征向量\InsertInlineEq{u_n}。此外特征向量是正交的:\InsertEqution{3.26}{U^{T} U=2 B \hat{\mathbf{1}}=U U^{T}}利用这些恒等式\InsertInlineEq{\phi_n(\frac{m}{2B})}可以显式地获得以下关系：正交性\InsertEqution{3.27}{\sum_{m=-\infty}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{l}\left(\frac{m}{2 B}\right)=2 B \delta_{n l}}完备性\footnote{完备性表示可以用这个基表示整个空间}\InsertEqution{3.28}{\sum_{n=0}^{\infty} \phi_{n}\left(\frac{m}{2 B}\right) \phi_{n}\left(\frac{k}{2 B}\right)=2 B \delta_{m k}}
 矩阵\InsertInlineEq{A^{(0)}}的结构非常有趣由于矩阵元素被定义为移位正弦函数乘积上的定积分，因此只有大约\InsertInlineEq{(2B)(2L)}个矩阵元素沿着以矩阵元素为\InsertInlineEq{A^{(0)}_{00}}中心的矩阵对角线是有效的。这解释了sinc核的一个众所周知的性质，即问题的最高特征值只有大约\InsertInlineEq{4BL}是显著的。这对于使用prolate函数的信号表示有着有趣的含义。\InsertPic{14}{F3.2}{\InsertInlineEq{L=1,B=5/\pi}时，使用基于采样定理的方法计算的前8个prolate函数}\InsertPic{15}{F3.3}{\InsertInlineEq{L=1,B=5/\pi}时，sinc核函数的前10个特征值}
 在\RefFig{F3.2}和\RefFig{F3.3}中我们展示了使用基于采样定理的方法分别计算prolate函数及其对应的特征值\footnote{求矩阵\InsertInlineEq{A_{mn}^{(0)}的特征值和特征向量，每个特征向量插值后就是prolate函数}}。使用以元素\InsertInlineEq{A^{(0)}_{00}}为中心的矩阵\InsertInlineEq{A^{(0)}}的\InsertInlineEq{101\times101}近似值，并根据\RefEq{3.23}中的定义使用标准数值积分方法计算矩阵元素。然后，对由此获得的离散特征向量进行内插，以获得连续的特征函数。 总的来说，我们观察到第n个长函数在间隔\InsertInlineEq{x:(-L,L)}中有n个过0点。对于\InsertInlineEq{n>4BL}阶的函数，这似乎是违反直觉的，其中零交叉点的数量超过了空间带宽积，尽管相应的长函数仍在无限间隔内被带宽限制。与空间带宽乘积相比，这样的函数在有限的时间间隔内具有更多的零交叉，实际上被称为“超振荡”。我们进一步注意到，当索引n超过\InsertInlineEq{4BL}时，相应的函数函数中的大多数能量都集中在间隔\InsertInlineEq{x:(-L,L)}之外。
 
@@ -263,5 +263,122 @@ Norbert Wiener首次提出了使用噪声的统计特性来设计适当的逆恢
 
   从此处所示的模糊和嘈杂的版本恢复合理的图像，使我们可以考虑计算光学成像系统，其中记录的原始数据不能很好地表示我们希望恢复的图像。 然后去模糊操作（例如使用维纳滤波器）恢复更合适的图像。 系统设计涉及针对原始数据记录的受控模糊处理，通过对图像进行去模糊处理，可以在设计中提供很大的灵活性，并允许有趣的应用程序，例如扩展的景深成像，这将在本书的后面部分进行介绍。
 \section{图像恢复中的约束优化算法}
+我们指出，任何计算系统的组成部分都必须使用记录的图像传感器数据来解决某些逆成像问题。   现在在越来越多的计算成像系统中，将此逆问题建模为优化问题，并应用适当的约束来推动数值优化过程的求解朝着有意义的图像方向发展。 在本章中，我们将讨论约束优化算法和一些简单的过程来解决此类问题，并为感兴趣的读者提供指向更高级技术的指南。 我们将从图像降噪问题开始讨论，然后再进行图像去卷积，最后以介绍令人兴奋的最新想法（例如压缩成像）作为结束。 尽管对于逆成像问题可以使用多种约束选择，但在本章中，我们将考虑总变化最小化约束作为一个具体示例。 之所以选择这种约束，是因为从图像质量的角度来看，约束的选择非常强大，其次，它不需要任何知识，例如小波或相关变换，都不在本书的讨论范围之内。
+\subsection{图像去噪}
+图像或视频数据构成了数字数据流的主要部分。 即使使用精心设计的成像系统也经常遇到的问题之一是所记录图像的嘈杂外观，给最终用户带来低图像质量的感觉。 噪音来自各种因素，例如 来自传感器的电子读出噪声，照明光束中光子数的统计变化以及检测过程的统计性质。 尽管可能会争辩说可以通过使用足够的光照水平来降低噪声，但是有一些应用程序，例如(i)天文学，其中光照水平本来就很低；或者(ii)医学X射线成像，其中不希望增加X射线剂量。 因此，从图像中去除噪声是重要的实际问题。 虽然去噪不是一个完整的反问题，但这是本章的一个很好的起点。
+\InsertPic{23}{F6.1}{典型的荧光显微图（a）和高斯滤波后的图像（b）}
+给定一个噪声图像\InsertInlineEq{g(x,y)},我们可以找到一个与\InsertInlineEq{g(x,y)}相近的图像\InsertInlineEq{\hat{g}(x,y)},满足减少噪声的同时保持图像的边缘。这个问题可以转换为最小化一个损失函数\InsertInlineEq{C(\hat{g})}:
+\InsertEqution{6.1}{C(\hat{g})=\frac{1}{2}\|g(x, y)-\hat{g}(x, y)\|^{2}+\alpha \psi(\hat{g})}
+\InsertInlineEq{\alpha}是一个实数，\InsertInlineEq{\psi}是一个玉树方程。一个应用广泛的\InsertInlineEq{\psi}是总变分函数（TV）：
+\InsertEqution{6.2}{\psi(\hat{g})=T V(\hat{g})=\|\nabla \hat{g}\|_{1}=\sum_{m, n}|\nabla \hat{g}|_{m, n}}。
+TV功能被视为梯度的L1范数，在上面的最后一项中对其进行了更明确的定义。 索引(m,n)表示图像中的像素索引。 因此，任何给定图像的电视中每个像素的贡献都与该像素处的梯度大小成比例。 还可以设计罚分，使得该贡献与梯度的L2-范数平方成比例。 但是，以L1范数的形式进行惩罚会使噪声引起的局部振荡相对较小。 由于边缘在典型图像中占据的像素相对较少，因此与使用L1-norm惩罚时边缘引起的相比，小局部振荡对惩罚函数的贡献通常更高。 最小化等式中成本函数的任何数值程序。 因此，\RefEq{6.1}在保持边沿的同时，对于小的局部振荡非常重要。
+使用梯度下降去最小化损失函数\RefEq{6.1}。给定一个初始猜测\InsertInlineEq{\tilde{g}},我们期望一个小的变量\InsertInlineEq{\delta\hat{g}}有如下形式：
+\InsertEqution{6.3}{C(\hat{g}+\delta\hat{g})<C(\hat{g})}
+如果使\InsertInlineEq{\delta \hat{g}}与损失函数的负梯度成比例，则不等式成立。 因此，使用梯度下降的迭代过程如下：
+\InsertEqution{6.4}{\hat{g}^{(n+1)}=\hat{g}^{(n)}-t\left[\nabla_{\hat{g}} C(\hat{g})\right]_{\hat{g}=\hat{g}^{(n)}}}
+\InsertInlineEq{t}是负梯度反方向的步长，为每次迭代确定t的数值，以确保成本函数确实按照\RefEq{6.3}减少。 例如，可以从某个标称值\InsertInlineEq{t=1}开始，并获得\InsertInlineEq{\hat{g}^{n+1}}的测试猜测。如果此猜测不满足\RefEq{6.3}，\InsertInlineEq{t}减小为（例如\InsertInlineEq{t/2}），依此类推，直到满足此条件。
+
+在这一点上，我们目前讨论一种的实际正值损伤函数的通用优化方法：
+\InsertEqution{6.5}{C(\hat{g})=\iint d x d y \mathcal{L}\left(\hat{g}, \nabla_{x} \hat{g}, \nabla_{y} \hat{g}\right)}
+\RefEq{6.1}也已经包括在这个形式中。注意到，\InsertInlineEq{C(\hat{g})}在\InsertInlineEq{\hat{\beta}}方向上的方向导数由下式给出:
+\InsertEqution{6.6}{\begin{aligned}
+  \frac{\partial C(\hat{g})}{\partial \hat{\beta}} &=\lim _{\epsilon \rightarrow 0} \frac{C(\hat{g}+\epsilon \hat{\beta})-C(\hat{g})}{\epsilon} \\
+  &=\nabla_{\hat{g}} C \cdot \hat{\beta} \\
+  &=\iint d x d y\left(\nabla_{\hat{g}} C\right)(x, y) \hat{\beta}(x, y)
+  \end{aligned}}
+  按照对变分演算问题的常规处理，我们将假设变化\InsertInlineEq{\epsilon \hat{\beta}}的解\InsertInlineEq{\hat{g}}在图像边界处为零。然后我们有：
+  \InsertEqution{6.7}{C(\hat{g}+\epsilon \hat{\beta})=C(\hat{g})+\epsilon \nabla_{\hat{g}} C(\hat{g}) \cdot \hat{\beta}}
+  另外，可以用项\InsertInlineEq{\mathcal{L}\left(\hat{g}, \nabla_{x} \hat{g}, \nabla_{y} \hat{g}\right)}表示\RefEq{6.5}功能梯度并具有Euler-Lagrange形式：
+  \InsertEqution{6.8}{\nabla_{\hat{g}} C(\hat{g})=\left[\frac{\partial \mathcal{L}}{\partial \hat{g}}-\frac{\partial}{\partial x}\left(\frac{\partial \mathcal{L}}{\partial\left(\nabla_{x} \hat{g}\right)}\right)-\frac{\partial}{\partial y}\left(\frac{\partial \mathcal{L}}{\partial\left(\nabla_{y} \hat{g}\right)}\right)\right]}
+  在设计使用迭代方案的优化算法（例如\RefEq{6.4}中描述的梯度下降方案）时，通常可以使用此函数梯度公式。
+
+  当使用如\RefEq{6.1}中的TV损失函数时。功能梯度可以明确地写为：
+  \InsertEqution{6.9}{\nabla_{\hat{g}} C(\hat{g})=-(g-\hat{g})-\alpha \nabla \cdot\left(\frac{\nabla \hat{g}}{|\nabla \hat{g}|}\right)} 
+  要注意的一个实施细节是\RefEq{6.9}第二项中的分母通常近似为：
+  \InsertEqution{6.10}{|\nabla \hat{g}| \approx \sqrt{|\nabla \hat{g}|^{2}+\delta^{2}}}
+  \InsertPic{24}{F6.2}{用TV进行去噪：（a）和（b）中分别使用权重参数\InsertInlineEq{\alpha=0.025,\alpha=0.25}的值}
+  对于较小的正常数δ我们避免在图像的恒定或平坦区域中除以零。 \RefEq{6.9}中的第二项被认为是一种各向异性的扩散形式，其扩散系数与局部梯度幅度成反比，这是思考电视罚分的边缘保持特性的另一种方式。在\RefFig{F6.2}的图示中,对于参数α的两个不同值显示了迭代过程的结果 在每种情况下，已经使用了20次算法迭代。 我们观察到，当\InsertInlineEq{\alpha}设置为一个较小的值时，解决方案看起来类似于原始的噪点图像。 此外，与\RefFig{6.1}(b)中的高斯滤波图像相比，\RefFig{6.2}(b)中的降噪图像保留了更好的边缘信息和清晰度，因此证明了基于TV的降噪优于线性滤波。
+\subsection{利用最优化进行图像解卷积}
+在本节中，我们为上一节中描述的降噪问题增加了一些复杂性，并研究以TV损失分作为约束项的图像恢复问题。在这种情况下，数据是带有噪声的模糊图像，我们将尝试对其进行恢复。数据模型如下
+\InsertEqution{6.11}{g_{o}(x, y)=h(x, y) * g_{i}(x, y)+n(x, y)}
+也可以用矩阵运算符形式表示为：
+\InsertEqution{6.12}{g_{o}=A g_{i}+n}
+用A表示系统或模糊的线性算子。 以与上一节类似的方式，我们对优化问题建模，其中损失函数定义为：
+\InsertEqution{6.13}{C\left(\hat{g}_{i}\right)=\frac{1}{2}\left\|g_{o}-A \hat{g}_{i}\right\|^{2}+\alpha T V\left(\hat{g}_{i}, \hat{g}_{i}^{*}\right)}
+在这里，我们假设图像\InsertInlineEq{\hat(g)_i}通常是复数，损失函数\InsertInlineEq{C}是\InsertInlineEq{\hat(g)_i,\hat(g)_i^*}的实数值函数。TV损失在这里定义为：
+\InsertEqution{6.14}{T V\left(\hat{g}, \hat{g}^{*}\right)=\|\nabla g\|_{1}=\sum_{i} \sqrt{\left(\nabla_{x} \hat{g}_{i}\right)\left(\nabla_{x} \hat{g}_{i}^{*}\right)+\left(\nabla_{y} \hat{g}_{i}\right)\left(\nabla_{y} \hat{g}_{i}^{*}\right)}}
+注意到，\InsertInlineEq{C}的变化现在可以表示为：
+\InsertEqution{6.15}{\begin{aligned}
+  \delta C\left(\hat{g}_{i}, \hat{g}_{i}^{*}\right) &=\frac{\partial C}{\partial \hat{g}_{i}} \delta \hat{g}_{i}+\frac{\partial C}{\partial \hat{g}_{i}^{*}} \delta \hat{g}_{i}^{*} \\
+  &=2 \operatorname{Re}\left[\frac{\partial C}{\partial \hat{g}_{i}} \delta \hat{g}_{i}\right] \\
+  &=2 \operatorname{Re}\left[\left(\frac{\partial C}{\partial \hat{g}_{i}^{*}}\right)^{*} \delta \hat{g}_{i}\right]
+  \end{aligned}}
+因为损失函数\InsertInlineEq{C}是实数，将Cauchy-Schwartz不等式应用于\InsertInlineEq{\operatorname{Re}\left[\left(\frac{\partial C}{\partial \hat{g}_{i}^{i}}\right)^{*} \delta \hat{g}_{i}\right]},上面告诉我们，当变量\InsertInlineEq{\delta \hat{g}_i}沿方向\InsertInlineEq{\left[\partial C / \partial \hat{g}_{i}^{*}\right]}可以达到\InsertInlineEq{\delta C}最大值。因此，使用梯度下降方案的去模糊问题的迭代解写如下：
+\InsertEqution{6.16}{\hat{g}_{i}^{(n+1)}=\hat{g}_{i}^{(n)}-t\left[\nabla_{\hat{g}_{i}^{*}} C\left(\hat{g}_{i}, \hat{g}_{i}^{*}\right)\right]_{\hat{g}_{i}=\hat{g}_{i}^{(n)}}}
+我们注意到，当计算函数梯度\InsertInlineEq{C}时\InsertInlineEq{\hat{g}^*_t,\hat{g}_i}应视为常数，反之亦然。 \RefEq{6.13}中成本函数的函数梯度可以被写成：
+\InsertEqution{6.17}{\nabla_{\hat{g}_{i}} C\left(\hat{g}_{i}\right)=-\frac{1}{2} A^{\dagger}\left(g_{o}-A \hat{g}_{i}\right)-\frac{1}{2} \alpha \nabla \cdot\left(\frac{\nabla \hat{g}_{i}}{\left|\nabla \hat{g}_{i}\right|}\right)}
+上面出现因数1/2是因为L2范数和TV项现在都是根据复数定义的。为了进一步进行，当系统模糊算子A对应于脉冲响应\InsertInlineEq{h(x,y)}的卷积时，我们需要明确定义伴随算子\InsertInlineEq{A^{\dagger}}。 我们首先将属于输出或图像空间的两个函数的标量积定义为：
+\InsertEqution{6.18}{\left(g_{o 1}, g_{o 2}\right)=\iint d x d y g_{o 1}^{*}(x, y) g_{o 2}(x, y)}
+伴随算子\InsertInlineEq{A^{\dagger}}定义为满足属性：
+\InsertEqution{6.19}{\left(g_{o 1}, A g_{i 2}\right)=\left(A^{\dagger} g_{o 1}, g_{i 2}\right)}
+这里的函数\InsertInlineEq{g_{i2}}属于输入或对象空间。 当A的作用等效于具有冲激响应\InsertInlineEq{h(x,y)}的卷积时，我们有：
+\InsertEqution{6.20}{\begin{aligned}
+  &\iint d x d y g_{o 1}^{*}(x, y)\left[\iint d x^{\prime} d y^{\prime} h\left(x-x^{\prime}, y-y^{\prime}\right) g_{i 2}\left(x^{\prime}, y^{\prime}\right)\right] \\
+  &=\iint d x^{\prime} d y^{\prime}\left[\iint d x d y h^{*}\left(x-x^{\prime}, y-y^{\prime}\right) g_{o 1}(x, y)\right]^{*} g_{i 1}\left(x^{\prime}, y^{\prime}\right)
+  \end{aligned}}
+  \InsertPic{25}{F6.3}{（a）使用TV约束优化进行图像恢复，（b）恢复图像的放大部分}
+  可以观察到，与卷积运算相对应的伴随算符\InsertInlineEq{A^{\dagger}}是另一个具有函数\InsertInlineEq{h^*(-x,-y)}的卷积。 现在可以像\RefEq{6.17}式中那样在功能梯度评估中使用。在\RefFig{F6.3}的插图中，我们使用带有TV损失的约束优化方案显示了\RefFig{F5.2}(b)中模糊图像的恢复，如\RefEq{6.3}所示。迭代参数是\InsertInlineEq{\alpha=1},进行了10代梯度下奖。 我们从恢复图像的放大部分观察到，与使用维纳滤波器进行图像恢复的图\InsertInlineEq{5.4}（b）相比，现在的振铃伪影已大大减少。 然而，维纳滤波器解决方案是通过单步非迭代过程获得的，因此可以用作基于优化的迭代解决方案的第一个猜测。当解决方案受适当的惩罚函数约束时，基于解决方案的解决方案通常可显着提高图像质量。 尽管图像质量是本书讨论范围之外的主题，但必须注意，在几种应用程序（例如诊断成像）中，最终用户感知的图像质量在图像恢复算法的设计中起着非常重要的作用。
+\subsection{盲去卷积}
+在本节中，我们将讨论一种不寻常的图像恢复方法-盲反卷积方法，该方法甚至可以在不知道脉冲响应\InsertInlineEq{h(x,y)}的情况下恢复模糊图像。 该问题需要交替的两步优化方法，其中去模糊的图像和脉冲都将在适当的约束下进行更新，直到两个函数都收敛到适当的解决方案为止。优化的目标如下：
+固定\InsertInlineEq{h}，最小化\InsertEqution{6.21}{\left\|g_{o}-h * g_{i}\right\|^{2}+\alpha_{1} \psi_{1}\left(g_{i}\right)},
+固定\InsertInlineEq{g_i},最小化\InsertEqution{6.22}{\text { Minimize }\left\|g_{o}-h * g_{i}\right\|^{2}+\alpha_{2} \psi_{2}(h)}
+这里\InsertInlineEq{\psi_1,\psi_2}表示要恢复的图像\InsertInlineEq{g_i}和脉冲响应\InsertInlineEq{h}的约束。显然由于\InsertInlineEq{h_i,g_i}都是未知的，因此该问题的解是无限的。因此，对恢复图像的约束和模糊函数在确定解决方案中都起着关键作用，这两个问题都基于问题的物理原理是有意义的。盲解卷积过程通常是迭代执行的，以便在第\InsertInlineEq{n+1}次迭代中使用以下步骤：
+\InsertItem{
+  \item 从模糊图像数据\InsertInlineEq{g_o(x,y)}和脉冲响应\InsertInlineEq{h^{(n)}}
+  \item 找到一个猜测解\InsertInlineEq{g_i^{(n+1)}(x,y)}通过解决\RefEq{6.13}的约束优化问题来对图像进行去卷积处理,其中\InsertInlineEq{h^{(n)}(x,y)}被认为是一个常数。在这种情况下的约束将是对期望的去卷积图像的适当约束。
+  \item 将\InsertInlineEq{g_i^{n+1}(x,y)}另一个约束作为优化，使用\RefEq{6.13}进行迭代卷积核，这时脉冲响应被更新为\InsertInlineEq{h^{(n+1)(x,y)}}。现在，优化中的约束项是指卷积核函数的所需属性。
+}
+\InsertPic{26}{F6.4}{盲去卷积的说明（a）模糊图（b）恢复的解卷积图（c）恢复的脉冲响应函数的放大部分}
+通过设置对模糊函数初始猜测\InsertInlineEq{h^{(0)}(x,y)}来启动迭代。 众所周知，初始猜测值\InsertInlineEq{h^{(0)}(x,y)}的近似大小或支持对于在实践中实现算法的良好收敛起着重要作用。可以首先从模糊图像数据中的任何可识别特征来估计模糊功能的支持。 在\RefFig{F6.4}的图示中，我们显示了使用盲反卷积方法恢复条形码的模糊图像。 在此，将正约束用于模糊图像和模糊函数。 另外，将TV用于去模糊的图像,该方法严格取决于所使用的约束，因此在设计实用算法时需要仔细考虑这一方面。 通过大气湍流和消除数字成像中的运动模糊，盲反卷积已在天文成像中找到了实际应用。
+\subsection{压缩成像}
+在这一部分，我们转向一个有趣的应用——压缩成像——约束优化框架。过去二十年对图像压缩标准的研究表明，自然图像是可压缩的。换句话说，典型图像中的自由度数量通常比用来表示它的像素数量少得多。例如，如果我们在视觉上观察\RefFig{F5.2}(a)中的图像，我们观察到有几个平坦或平滑的区域，其中数值在局部上几乎是恒定的或者在像素之间缓慢变化。像素值中的这些相关性可以被有效地用于图像的存储，正如现在在广泛使用的图像压缩标准如JPEG2000中所做的那样。如果在某些应用中要记录的大多数图像预期具有某种结构并因此具有可压缩性，那么要说明的第一个问题就是:
+
+生成一幅N像素图像需要多少次测量？
+
+对于\RefEq{6.12}中的成像模型,这个问题的简单而传统的答案（不考虑图像\InsertInlineEq{g_i}中的任何可压缩性）是我们将需要大约N次测量来生成N个像素图像。 原因是是\RefEq{6.12}是一个线性方程组，为了找到N个未知像素值，我们需要与未知数一样多的方程。   但是，如果我们假设要恢复的图像是可压缩的，那么直观上可以想到，远小于N的测量次数就足够了。我们通过傅立叶域测量的具体示例来说明这一点。
+\InsertPic{27}{F6.5}{(a)Logo 图案\InsertInlineEq{g(x,y)},(b)傅里叶变换幅值对数显示\InsertInlineEq{|G(f_x,f_y)|},(c)梯度图\InsertInlineEq{|\nabla g(x, y)|}}
+傅立叶域测量通常发生在光学-医学成像模式（如MRI和X射线CT），或者射电天文学等领域。 考虑一个图像\InsertInlineEq{g(x,y)}及其傅里叶变换\InsertInlineEq{G(f_x,f_y)}，分别如\RefFig{F6.5}(a),(b)所示。如果在傅立叶域中测量了全部数据，则可以使用傅立叶逆变换对\InsertInlineEq{G(f_x,f_y)}进行求逆，以获得图像\InsertInlineEq{g(x,y)}。 但是，我们观察到图像\InsertInlineEq{g(x,y)}在梯度域中是稀疏的。如果我们如图\RefFig{F6.5}（c）所示观察梯度幅值图像，则会观察到具有明显梯度幅值的像素数量远小于像素总数。
+\InsertPic{28}{F6.6}{(a)二值化掩码\InsertInlineEq{M(f_x,f_y)},(b)\InsertInlineEq{|M(f_x,f_y)G(f_x,f_y)|}}
+我们能否以某种方式利用这种梯度域稀疏性？ 例如，我们可能在\RefFig{F6.6}(a)所示的二进制（0,1）掩码\InsertInlineEq{M(f_x,f_y)}中显示为亮像素的位置处随机地仅测量\InsertInlineEq{N/4}个傅立叶域样本。 相应的掩蔽傅立叶数据如\RefFig{F6.6}（b）所示。 在求解N个未知像素值的常规意义上，傅里叶域中的\InsertInlineEq{N/4}个数据点显然是不完整的。 当数据样本的数量远小于N时，我们需要求解的方程组不完整。 原则上，这种不完整的线性方程组具有无限数量的解。为了找到合适的解决方案，我们需要一些其他准则来决定选择哪种解决方案。作为首次尝试，我们通过最小化成本函数来考虑L2-范数平方解决方案：
+\InsertEqution{6.23}{C\left(g_{i}, g_{i}^{*}\right)=\frac{1}{2}\left\|M\left(f_{x}, f_{y}\right)\left[G\left(f_{x}, f_{y}\right)-\mathcal{F}\left\{g_{i}(x, y)\right\}\right]\right\|^{2}}
+\InsertPic{29}{F6.7}{（a）最小平方L2-范数问题的图像恢复，如\RefEq{6.23}所示（b）带有TV惩罚的最小平方L2-范数问题\RefEq{6.24}所示}
+请注意，此处我们正在寻找最小二乘意义上的最佳解决方案，该解决方案需要根据掩模定义在傅立叶域中的测量位置进行接近\InsertInlineEq{G(f_x,f_y)}的傅立叶变换。 这个最小化问题的解决方案\RefFig{6.7}(a)所示。 我们观察到最小二乘解显然质量较差，在任何实际应用中均无用。如上所述，由于我们希望解决方案在梯度域中比较稀疏，因此可以通过将成本函数重新定义为以下形式，将该信息合并到成本函数中：
+\InsertEqution{6.24}{
+  C\left(g_{i}, g_{i}^{*}\right)=\frac{1}{2}\left\|M\left(f_{x}, f_{y}\right)\left[G\left(f_{x}, f_{y}\right)-\mathcal{F}\left\{g_{i}(x, y)\right\}\right]\right\|^{2} \\
+  +\alpha T V\left(g_{i}, g_{i}^{*}\right)}
+  图6.7（b）中显示了结合TV损失的相应问题的方案效果，其中我们观察到25％傅里叶测量值的接近完美的图像恢复。 上面的两个优化问题都是使用\RefEq{6.16}和\RefEq{6.17}中描述的迭代方案解决的。在此图中，伴随运算符\InsertInlineEq{A^{\dagger}}对应于受掩码\InsertInlineEq{M(f_x,f_y)}约束的傅立叶数据的傅立叶逆变换。
+\subsubsection{二次采样数据测量和图像恢复指南}
+尽管我们已经看到了传统意义上不完整的数据具有出色的图像恢复能力，但变换的选择和测量方案仍需要进一步讨论。为了简化符号，我们将假定解\InsertInlineEq{g(x,y)}可以根据函数\InsertInlineEq{\left\{\phi_{n}(x, y)\right\}}的基础集进行展开：
+\InsertEqution{6.25}{g(x, y)=\sum_{n} \beta_{n} \phi_{n}(x, y)}
+进一步，我们假设基础的选择是使得由所有系数\InsertInlineEq{\beta_n}组成的向量\InsertInlineEq{\boldsymbol{\beta}}本质上是稀疏的。 换句话说，与\InsertInlineEq{N}相比，少量的系数\InsertInlineEq{\beta_n}是非常显著的。 基础的选择通常可以是基于比例尺的基础，例如已知对表示自然图像有效的一些小波族,使用的方程依然如\RefEq{6.12}所示：
+\InsertEqution{6.26}{g_{o}=A \sum_{n} \beta_{n} \phi_{n}(x, y)+n(x, y)}
+压缩感测问题是指在\InsertInlineEq{\boldsymbol{\beta}}是稀疏向量的先验约束下恢复系数\InsertInlineEq{\beta_n}。 如Candes，Romberg和Tao（2006）所示，对于由以下公式给出的成本函数，可以将此问题建模为最小化问题：
+\InsertEqution{6.27}{C(\boldsymbol{\beta})=\frac{1}{2}\left\|g_{o}-A \sum_{n} \beta_{n} \phi_{n}(x, y)\right\|^{2}+\alpha\|\boldsymbol{\beta}\|_{1}}
+在这里，\InsertInlineEq{\boldsymbol{\beta}}的稀疏性是通过施加L1范数惩罚来实现的。 更明确地是\InsertInlineEq{||\boldsymbol{\beta}||_1=\sum_n |\beta_n|} 。\RefEq{F6.7}中用于说明的TV损失除了图像表示不是方程的基的集合之外也是L1-norm损失的一个例子。
+
+稀疏性和L1范数之间的粗略的联系是L1域中的球是“尖的”（例如，在2D中，相对于L1范数的单位球是\InsertInlineEq{|x_1|+|x_2|=1}而不是\InsertInlineEq{x^2_1+x^2_2=1}）。满足数据约束以及L1惩罚的最佳解决方案是，表示数据约束的超曲面与以轴为系数\InsertInlineEq{\beta_n}的大维空间中的L1球面相交。L1球体的“尖角”性质表明，解决方案的系数\InsertInlineEq{\beta_n}稀疏。上面的几何图形不容易想象，但是，可以得出这样的事实：TV惩罚偏爱边缘稀疏的解决方案，以及恢复区中大部分平坦（小梯度）区域的解决方案。最后，为了完整起见，我们要提到的是，按照严格的压缩成像（或传感）理论，如果一个N像素图像在某种稀疏性的基础上很可能具有\InsertInlineEq{K(<<N)}个重要系数的表示形式，则需要进行多次测量为了通过适当的算法进行期望的图像恢复，需要\InsertInlineEq{K \log N}的数量级次迭代。
+\InsertPic{30}{F6.8}{以像素为单位的稀疏图像：白点显示的像素很少为非零，而所有其他像素为零}
+
+关于压缩成像方法的另一个重要方面是测量方案与图像可能稀疏的基础之间的关系。 我们将以一个涉及像素稀疏性的简单案例来说明这一点。考虑一个以像素为单位的稀疏图像，如\RefFig{F6.8}所示,假设我们希望根据\RefEq{6.26}中的模型测量对应于这个稀疏对象的输出\InsertInlineEq{g_o}。我们注意到每个测量点\InsertInlineEq{g_{oj}}对应一个线性组合:
+\InsertEqution{6.28}{g_{o j}=\sum_{n} \beta_{n}\left(A_{j}, \phi_{n}\right)+\text { noise }}
+这里\InsertInlineEq{A_j,\phi_n}表示矩阵\InsertInlineEq{A}的第j行（测量基的第j个元素），\InsertInlineEq{\phi_n}是稀疏基函数。首先让我们注意，在这种情况下，稀疏基是像素基。在像素基的情况下，基函数\InsertInlineEq{\phi_n}是其第n个像素的值等于1而所有其他像素都为零的图像。如果我们希望从远小于图像中总像素数n的测量数中恢复图像\InsertInlineEq{g=\sum_n\beta_n\phi_n}，我们当然不能使用像素基作为测量基。由于\RefFig{6.8}所示的图像在像素基上是稀疏的，再次选择像素基进行测量将意味着大多数标量积\InsertInlineEq{(A_j,\phi_n)}将为零，并且恢复问题将是无意义的。另一方面，如果我们选择一个傅里叶基来测量\InsertInlineEq{A}中的矢量，那么大多数标量积都可能存在，这使得使用适当设计的算法来恢复稀疏图像成为可能。因此，要遵循的一个重要准则是，要恢复的图像通常不能在\InsertInlineEq{\phi_n}基和测量基中都是稀疏的。这两个基集的这个性质用所谓的限制等距性质来更正式地表示。
+\subsubsection{压缩成像原理的系统级含义}
+解决这种“不完全数据”反问题的可能性对于未来成像系统的设计具有重要意义。压缩成像等概念背后的哲学对以下几类问题很重要：
+\InsertItem{\item \textbf{成像系统突破传统的感知极限。}我们现在有了一个新的框架来重新审视我们对成像系统性能指标的概念，如分辨率、对噪声的敏感度等，并进化出新的成像概念，在这些方面可能优于传统成像。
+\item \textbf{更简单/更精简的成像系统。}高质量的成像性能和更少的测量量意味着简化了成像系统设计，并相应降低了医疗，安全，教育等领域的成像技术成本，对社会产生了深远的影响}
+
+\section{随机过程}
+在本章中，我们将介绍随机过程理论中的几个重要概念，这些概念将在以后讨论光的相干特性时有用。 当物理现象由于大量未知（几乎随机）因素而发生时，实验结果的观察和预测只能以统计学的方式完成。 对于大多数光学/光子学中光的产生，由于传播和检测本质上不是确定性的，因此对随机过程的研究至关重要。
+
   \end{sloppypar}
 \end{document}
